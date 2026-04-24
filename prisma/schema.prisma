@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+
+model PlayerStats{
+  id Int @id @default(autoincrement())
+  steamId String
+  kills Int
+  deaths Int
+  matches Int
+  hsRate Float
+  updateAt DateTime @updatedAt
+}
