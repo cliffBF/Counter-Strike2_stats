@@ -47,7 +47,7 @@ export async function GET(){
 
     if(!response.ok){
         return NextResponse.json(
-            {error: 'データ取得失敗. プロフィール非公開の可能性.'},
+            {error: 'failed to getting data. is your steam profile public?'},
             {status: response.status}
         );
     }
@@ -76,18 +76,28 @@ export async function GET(){
     //HSrate計算
     const hsRate = kills > 0 ? (headshots / kills) * 100 : 0;
 
-    //prismaでDBに保存
-    await prisma.playerStats.create({
-        data: {
-            steamId: steamId,
-            kills: kills,
-            deaths: deaths,
-            matches: matches,
-            hsRate: hsRate,
-            wins: wins,
-        },
-    });
+    //最新データを1件だけ取得
+    const lastSaved = await prisma.playerStats.findFirst({
+        where: {steamId: steamId},
+        orderBy: {createdAt: 'desc'},
+    })
 
+    //初回保存とmatchsが増えた時のみDBに保存する
+    if(!lastSaved || matches > lastSaved.matches){
+        await prisma.playerStats.create({
+            data: {
+                steamId: steamId,
+                kills: kills,
+                deaths: deaths,
+                matches: matches,
+                hsRate: hsRate,
+                wins: wins,
+            },
+        });
+        console.log(`dyou won, the data saved. (total matches: ${matches})`);
+    }else{
+        console.log('data saving was skipped(you played deathmatch?)');
+    }
     
     const historyData = await prisma.playerStats.findMany({
         where: { steamId: steamId },
