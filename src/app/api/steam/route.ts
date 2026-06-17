@@ -120,3 +120,71 @@ export async function GET(){
         );
     }
 }
+
+//デモンストレーション用のスクリプト
+
+/*interface DemoPostRequest {
+    kills: number;
+    deaths: number;
+    matches: number;
+    wins: number;
+    headshots: number;
+}
+
+export async function POST(request: Request) {
+    const steamId = process.env.STEAM_ID;
+
+    if (!steamId) {
+        return NextResponse.json({ error: 'SteamIDが設定されていません' }, { status: 500 });
+    }
+
+    try {
+        //デモスクリプトから送るJSON
+        const body: DemoPostRequest = await request.json();
+        const { kills, deaths, matches, wins, headshots } = body;
+
+        //確認
+        console.log(`[Demo POST] データ受信: matches=${matches}, kills=${kills}`);
+
+        //最新のデータを取得して比較
+        const lastSaved = await prisma.playerStats.findFirst({
+            where: { steamId: steamId },
+            orderBy: { createdAt: 'desc' },
+        });
+
+        //matchesが増えた時のみ保存(理由はdevmemo)
+        if (!lastSaved || matches > lastSaved.matches) {
+            const hsRate = kills > 0 ? (headshots / kills) * 100 : 0;
+
+            await prisma.playerStats.create({
+                data: {
+                    steamId: steamId,
+                    kills: kills,
+                    deaths: deaths,
+                    matches: matches,
+                    hsRate: hsRate,
+                    wins: wins,
+                },
+            });
+            console.log(`[Demo POST] 試合終了: DBに保存しました (Total matches: ${matches})`);
+        } else {
+            console.log('[Demo POST] 試合数に変化がないため、保存をスキップしました');
+        }
+
+        //全履歴を更新画面
+        const historyData = await prisma.playerStats.findMany({
+            where: { steamId: steamId },
+            orderBy: { createdAt: 'asc' },
+        });
+
+        return NextResponse.json({
+            message: 'demo_post_success',
+            current: historyData[historyData.length - 1],
+            history: historyData
+        });
+
+    } catch (error) {
+        console.error('[Demo POST] Error:', error);
+        return NextResponse.json({ error: '内部エラー' }, { status: 500 });
+    }
+}*/
