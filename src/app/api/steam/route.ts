@@ -121,7 +121,7 @@ export async function GET(){
     }
 }
 
-//デモンストレーション用のスクリプト
+//デモンストレーション用のスクリプト(調整中)
 
 /*interface DemoPostRequest {
     kills: number;
