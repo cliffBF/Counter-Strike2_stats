@@ -26,28 +26,29 @@ export default function StatsChart({ historyData }: { historyData: any[] }) {
     <div style={{ width: '100%', height: 300 }}>
       <ResponsiveContainer>
         <LineChart data={recentData} margin={{ top: 10, right: 35, left: 0, bottom: 20 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#1e2530" />
           <XAxis 
             dataKey="matchIndex" 
-            stroke="#9CA3AF"
+            stroke="#6b7280"
             interval={0}
             angle={-30}
             textAnchor="end"
             fontSize={11}
           />
           <YAxis 
-            stroke="#9CA3AF" 
-            domain={[0, (dataMax: number) => Math.max(dataMax + 5, 30)]} 
+            stroke="#6b7280" 
+            domain={[0, (dataMax: number) => Math.max(dataMax + 5, 30)]}
           />
           <Tooltip 
-            contentStyle={{ backgroundColor: '#1F2937', border: 'none' }} 
-            labelFormatter={(label, payload) => payload?.[0]?.payload?.displayDate} 
+            contentStyle={{ backgroundColor: '#12161f', border: '1px solid #1e2530', borderRadius: 8 }}
+            labelStyle={{ color: '#8a93a6' }}
+            labelFormatter={(label, payload) => payload?.[0]?.payload?.displayDate}
           />
-          <Legend verticalAlign="top" height={36} />
+          <Legend verticalAlign="top" height={36} wrapperStyle={{ color: '#8a93a6', fontSize: 12 }} />
           <Line 
             type="monotone" 
             dataKey="sessionKills" 
-            stroke="#3b82f6" 
+            stroke="#8fd14f" 
             strokeWidth={3} 
             name="Kills" 
             dot={{ r: 4 }} 
@@ -56,7 +57,7 @@ export default function StatsChart({ historyData }: { historyData: any[] }) {
           <Line 
             type="monotone" 
             dataKey="sessionDeaths" 
-            stroke="#ef4444" 
+            stroke="#e5484d" 
             strokeWidth={3} 
             name="Deaths" 
             dot={{ r: 4 }} 
