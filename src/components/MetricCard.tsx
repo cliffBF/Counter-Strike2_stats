@@ -28,12 +28,12 @@ export default function MetricCard({
           <RingGauge percent={ring} value={value} unit={unit} />
         ) : (
           <>
-            <span className="text-4xl font-bold text-[#8fd14f] tabular-nums">
+            <span className="font-display text-4xl font-bold text-[#8fd14f] tabular-nums">
               {value}
               {unit}
             </span>
             {trend && (
-              <span className={trend === 'up' ? 'text-[#8fd14f]' : 'text-[#e5484d]'}>
+              <span className="font-display text-2xl font-bold text-white tabular-nums">
                 {trend === 'up' ? <ArrowUp size={18} /> : <ArrowDown size={18} />}
               </span>
             )}

@@ -25,7 +25,7 @@ export default function RangeCard({
     >
       <div className="flex items-center justify-between mb-1">
         <span className="text-sm font-semibold text-white">{title}</span>
-        <span className="text-lg font-bold tabular-nums" style={{ color: accent }}>
+        <span className="font-display text-lg font-bold tabular-nums" style={{ color: accent }}>
           {value}
         </span>
       </div>

@@ -25,20 +25,21 @@ export default async function Home() {
 
   return (
     <main className="relative min-h-screen text-[#e5e7eb]">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[600px] overflow-hidden">
+        <div className="fixed inset-0 -z-10 overflow-hidden">
         <Image
-          src="/caspian border.jpg"
+          src="/endgame.jpg"
           alt=""
           fill
           priority
-          className="object-cover object-[center_40%]"
+          className="object-cover object-[center_60%]"
         />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-[#05070b]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/35 to-black/55" />
       </div>
 
-      <div className="mx-auto max-w-[1400px] p-8 md:p-10">
+      <div className="mx-auto max-w-[1000px] p-8 md:p-10">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+          <h1 className="font-display text-3xl font-bold text-white 
+          drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">Dashboard</h1>
         </div>
 
         {stats ? (
